@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 import httpx
 import json
-from query_openai import QueryOpenAi
+from query_granite import GraniteChat
 
 # Initialize FastAPI app
 app = FastAPI()
@@ -53,12 +53,13 @@ async def stream(
     with open("sessionID.txt", "w") as f:
         f.write(sessionID)
 
-    query_rag = QueryOpenAi()
+    query_rag = GraniteChat()
     
 
     def event_generator():
         response_chunks = []
-        for content in query_rag.query_openai(search_query):
+        
+        for content in query_rag.chat(search_query):
             json_content = json.dumps({'type': 'response', 'data': content})
             # Make the response SSE compliant
             sse_content = f"data: {json_content}\n\n"

@@ -1,7 +1,7 @@
 
 # Basic Chat Application with OpenAI Integration
 
-This is a simple chat application that integrates a frontend and backend to provide chat functionality using OpenAI's API. The application allows users to interact with an AI agent and receive responses in real time.
+This is a simple chat application that integrates a frontend and backend to provide chat functionality using OpenAI's API. The application allows users to interact with an AI agent and receive responses in real time. This branch has Granite from IBM working. Install Ollama on your machine https://ollama.com/. then from terminal you can run ollama pull granite3.1-dense:8b and then OLLAMA will be accessible via the 11434 port locally. Run the code and it will work. 
 
 ## Project Structure
 
@@ -57,6 +57,9 @@ This is a simple chat application that integrates a frontend and backend to prov
 
 ### `query_openai.py`
 - Contains utility functions for querying OpenAI's API and processing responses.
+
+### `query_granite.py`
+- Contains utility functions for querying IBM Granite via OLLAMA. Install Ollama on your machine https://ollama.com/. then from terminal you can run ollama pull granite3.1-dense:8b and then OLLAMA will be accessible via the 11434 port locally. Run the code and it will work. 
 
 ### `requirements.txt`
 - Dependencies:

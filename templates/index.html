@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Chat Full Front end and Backend with OpenAI</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="title-container">
+            <h1>Chat Template</h1>
+            <h2>Alpha Release</h2>
+        </div>
+        <img src="/static/Logo.png" alt="Logo" id="logo">
+    </header>
+    <main id="chat-container">
+        <h3 class="welcome-header">Welcome {{username}}</h3>
+        <div id="chat-box"></div>
+        <form id="input-container">
+            <input type="text" id="search_query" placeholder="Type your query here..." required>
+            <input type="hidden" id="topNDocuments" value="5">
+            <button type="submit">Send</button>
+        </form>
+    </main>
+    <script src="/static/chat.js"></script>
+</body>
+</html>

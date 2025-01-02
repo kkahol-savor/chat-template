@@ -1,0 +1,116 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: rgb(34,173,195);
+    background: linear-gradient(0deg, rgba(34,173,195,1) 0%, rgba(9,10,55,1) 100%);
+}
+
+/* Header Section */
+header {
+    background-color: #290c90af;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.welcome-header {
+    color: white;
+}
+
+header #logo {
+    max-height: 50px;
+    margin-bottom: 0;
+}
+
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+header h2 {
+    font-size: 12px;
+    margin: 0;
+    font-weight: 300;
+    color: #bab6d2c0;
+}
+
+header .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Chat Container */
+#chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+#chat-box {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: rgba(203, 207, 209, 0.773);
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+/* Input Container */
+#input-container {
+    display: flex;
+}
+
+#input-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(217, 222, 225, 0.796);
+    border-radius: 4px;
+}
+
+#input-container button {
+    padding: 10px;
+    border: none;
+    background-color: #00ffbb;
+    color: white;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Chat Messages */
+#chat-box div {
+    margin: 5px 0;
+    padding: 5px;
+}
+
+#chat-box div strong {
+    display: block;
+    font-weight: bold;
+}
+
+#chat-box .citation {
+    font-size: 10px; /* Correctly sets the font size */
+    font-style: italic; /* Italicizes the font */
+    color: rgb(42, 41, 41); /* Sets the font color to gray */
+    margin-top: 5px; /* Adds some spacing */
+}
+
+#chat-box .citation-title {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 8px;
+    color: gray; /* Makes the "References" label gray */
+    margin-top: 10px; /* Adds spacing above */
+}

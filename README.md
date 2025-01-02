@@ -1,0 +1,2 @@
+Basic Chat Template with OpenAI Integration
+This repository contains a basic chat application template that integrates with OpenAI's API. The application is built using FastAPI for the backend and Jinja2 for templating. It allows users to interact with OpenAI's language model through a web interface.

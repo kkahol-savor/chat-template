@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 import httpx
 import json
-from query_openai import QueryOpenAi
+from query_gemini import QueryGemini
 import shutil
 
 # Initialize FastAPI app
@@ -54,12 +54,12 @@ async def stream(
     with open("sessionID.txt", "w") as f:
         f.write(sessionID)
 
-    query_rag = QueryOpenAi()
-    
+    # Pass sessionID to QueryGemini
+    query_rag = QueryGemini(session_id=sessionID)
 
     def event_generator():
         response_chunks = []
-        for content in query_rag.query_openai(search_query):
+        for content in query_rag.query_gemini(search_query):
             json_content = json.dumps({'type': 'response', 'data': content})
             # Make the response SSE compliant
             sse_content = f"data: {json_content}\n\n"
@@ -100,5 +100,13 @@ async def upload_file(file: UploadFile = File(...)):
     return {"filename": file.filename, "message": "File uploaded successfully."}
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    session_id = input("Enter session ID: ")  # Prompt user for session ID
+    query = QueryGemini(session_id)  # Pass session ID to QueryGemini
+    try:
+        while True:
+            prompt = input("Enter your question (or press CTRL+C to exit): ")
+            print("Answer:", end=' ')
+            for chunk in query.query_gemini(prompt):  # Query Gemini with the prompt
+                print(chunk, end='')
+    except KeyboardInterrupt:
+        print("\nExiting. Goodbye!")

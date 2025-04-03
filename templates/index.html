@@ -22,8 +22,34 @@
             <input type="text" id="search_query" placeholder="Type your query here..." required>
             <input type="hidden" id="topNDocuments" value="5">
             <button type="submit">Send</button>
+            <button type="button" id="uploadButton">Upload</button>
+            <input type="file" id="fileInput" multiple style="display: none;" />
         </form>
     </main>
+
+    <!-- Drag-and-Drop Modal -->
+    <div id="uploadModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h3>Drag and Drop Files Here</h3>
+            <p>or click to select files</p>
+            <div id="dropZone" class="drop-zone">
+                <input type="file" id="modalFileInput" multiple style="display: none;" />
+                <button id="selectFilesButton" type="button">Select Files</button>
+            </div>
+            <p>Allowed file types: .pdf, .json, .csv, .xlsx, .xls, .docx, .doc</p>
+        </div>
+    </div>
+
+    <!-- Indexing Modal -->
+    <div id="indexingModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Indexing Files...</h3>
+            <p>Please wait while your files are being indexed.</p>
+            <div class="loader"></div>
+        </div>
+    </div>
+
     <script src="/static/chat.js"></script>
 </body>
 </html>

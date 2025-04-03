@@ -15,6 +15,7 @@ def upload_and_index(file_path):
         total_rows = indexer.get_total_rows()
         logging.info(f"Indexing complete. Total rows indexed: {total_rows}")
     except Exception as e:
+        # Fix: Ensure no invalid arguments are passed to the logger
         logging.error(f"Error during indexing: {e}")
         raise
 

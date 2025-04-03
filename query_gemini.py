@@ -16,26 +16,45 @@ class QueryGemini:
         if session_id not in QueryGemini.session_histories:
             QueryGemini.session_histories[session_id] = deque(maxlen=10)  # Initialize history for sessionID
 
-    def query_gemini(self, prompt: str):
-        '''Function to query Google's Gemini API'''
-        # Get the history for the current session
-        history = QueryGemini.session_histories[self.session_id]
-        history_context = "\n".join(
-            [f"Q: {item['question']}\nA: {item['answer']}" for item in history]
-        )
-        last_answer = history[-1]['answer'] if history else ""
-        full_prompt = (
-            f"The following is a conversation history. Use it to answer the next question. "
-            f"Continue the conversation based on the context provided:\n"
-            f"{history_context}\nLast Answer: {last_answer}\nQ: {prompt}" if history_context else prompt
-        )
+    def query_gemini(self, query: str, context: str = ""):
+        """
+        Query Gemini with the given query and optional context.
+        If context is provided, it is included in the prompt for better responses.
+        The history of the session is also included in the prompt.
+        """
+        try:
+            # Retrieve the session history
+            history = QueryGemini.session_histories[self.session_id]
 
-        response = self.model.generate_content(full_prompt, stream=True)
-        answer = ""
-        for chunk in response:
-            answer += chunk.text
-            yield chunk.text
-        history.append({"question": prompt, "answer": answer.strip()})  # Save Q&A to session-specific history
+            # Combine context, history, and query into a structured prompt
+            history_text = "\n".join(history) if history else "No history available."
+            context_text = context if context else "No context available."
+            print(f"History: {history_text}")
+            print(f"Context: {context_text}")
+            prompt = (
+                f"This is the history:\n{history_text}\n\n"
+                f"This is the context:\n{context_text}\n\n"
+                f"This is the query:\n{query}\n\n"
+                "Answer appropriately with citations to the context. Insert citations in the format [1], [2], etc.\n"
+                "If no context is available, answer based on the history.\n"
+                "If no history is available, answer based on your knowledge.\n"
+                "if history is available, answer based on the history and interpret the query based on history.\n"
+                "If the question is not clear, ask for clarification.\n"
+                "If the question is not relevant, say 'I cannot help with that'."
+            )
+
+            # Call the Gemini API and stream the response
+            response = self.model.generate_content(prompt, stream=True)
+            answer = ""
+            for chunk in response:
+                answer += chunk.text
+                yield chunk.text
+
+            # Update the session history with the latest Q&A
+            history.append(f"Q: {query}")
+            history.append(f"A: {answer.strip()}")
+        except Exception as e:
+            raise RuntimeError(f"Error querying Gemini: {e}")
 
     def get_history(self):
         '''Retrieve the history of Q&A for the current session'''
@@ -50,6 +69,5 @@ if __name__ == "__main__":
             print("Answer:", end=' ')
             for chunk in query.query_gemini(prompt):
                 print(chunk, end='')
-            #print("\nHistory:", query.get_history())
     except KeyboardInterrupt:
         print("\nExiting. Goodbye!")

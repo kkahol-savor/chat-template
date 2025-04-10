@@ -1,7 +1,7 @@
 
 # Basic Chat Application with OpenAI Integration
 
-This is a simple chat application that integrates a frontend and backend to provide chat functionality using OpenAI's API. The application allows users to interact with an AI agent and receive responses in real time.
+This is a simple chat application that integrates a frontend and backend to provide chat functionality using OpenAI's API. The application allows users to interact with an AI agent and receive responses in real time. You can follow https://youtu.be/s4Xj8Yps7_g to get a full tutorial on how to run this. 
 
 ## Project Structure
 
@@ -93,3 +93,7 @@ This is a simple chat application that integrates a frontend and backend to prov
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
+
+## Branches
+granite branch allows you to learn how to build the chatbot using local LLM via OLLAMA
+gemini branch allows to build a full RAG system while uploading excel or csv to consume data (tutorial coming up)
